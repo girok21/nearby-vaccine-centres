@@ -74,6 +74,32 @@ async function test()
     centre = await centre.json();
     centre = centre.sessions;
     console.log(centre);
+    await clearTableData();
+    for(let i = 0; i<centre.length; i++)
+    {
+        let tr = document.createElement('tr');
+        let td_centId = tr.appendChild(document.createElement('td'));
+        let td_block = tr.appendChild(document.createElement('td'));
+        let td_pincode = tr.appendChild(document.createElement('td'));
+        let td_vaccine = tr.appendChild(document.createElement('td'));
+        let td_minAge = tr.appendChild(document.createElement('td'));
+        let td_feeType = tr.appendChild(document.createElement('td'));
+        let td_fee = tr.appendChild(document.createElement('td'));
+        let td_avCap = tr.appendChild(document.createElement('td'));
+        let td_timing = tr.appendChild(document.createElement('td'));
+
+        td_centId.innerHTML = centre[i].center_id;
+        td_block.innerHTML = centre[i].block_name; 
+        td_pincode.innerHTML = centre[i].pincode;
+        td_vaccine.innerHTML = centre[i].vaccine;
+        td_minAge.innerHTML = centre[i].min_age_limit;
+        td_feeType.innerHTML = centre[i].fee_type;
+        td_fee.innerHTML = centre[i].fee;
+        td_avCap.innerHTML = centre[i].available_capacity;
+        td_timing.innerHTML = centre[i].from;
+        
+        document.getElementById("centreTable").appendChild(tr);
+    }
 }
 async function testpincode()
 {
@@ -82,8 +108,47 @@ async function testpincode()
     pincode = parseInt(pincode);
     let centre = await fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pincode}&date=31-03-2021`);
     centre = await centre.json();
+    centre = centre.sessions;
     console.log(centre);
+    await clearTableData();
+    for(let i = 0; i<centre.length; i++)
+    {
+        let tr = document.createElement('tr');
+        let td_centId = tr.appendChild(document.createElement('td'));
+        let td_block = tr.appendChild(document.createElement('td'));
+        let td_pincode = tr.appendChild(document.createElement('td'));
+        let td_vaccine = tr.appendChild(document.createElement('td'));
+        let td_minAge = tr.appendChild(document.createElement('td'));
+        let td_feeType = tr.appendChild(document.createElement('td'));
+        let td_fee = tr.appendChild(document.createElement('td'));
+        let td_avCap = tr.appendChild(document.createElement('td'));
+        let td_timing = tr.appendChild(document.createElement('td'));
 
+        td_centId.innerHTML = centre[i].center_id;
+        td_block.innerHTML = centre[i].block_name; 
+        td_pincode.innerHTML = centre[i].pincode;
+        td_vaccine.innerHTML = centre[i].vaccine;
+        td_minAge.innerHTML = centre[i].min_age_limit;
+        td_feeType.innerHTML = centre[i].fee_type;
+        td_fee.innerHTML = centre[i].fee;
+        td_avCap.innerHTML = centre[i].available_capacity;
+        td_timing.innerHTML = centre[i].from;
+        
+        document.getElementById("centreTable").appendChild(tr);
+    }
+
+}
+
+async function clearTableData()
+{
+    
+    let len = document.getElementById("centreTable").rows.length;
+    console.log("table length "+len);
+    for(let i = 1; i< len; i++)
+    {
+        console.log()
+        document.getElementById("centreTable").deleteRow(1);
+    }
 }
 // let distId = document.getElementById("districtSelect").value;
 
