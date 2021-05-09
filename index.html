@@ -8,46 +8,44 @@
     <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <h1>Co-WIN Vaccination Centres and Availability</h1>
-    </header>
-
     <div class="container">
-        <h3>Either select state and district of your choice or enter your pincode</h3>
+        <header>
+            Co-WIN Vaccination Centres and Availability
+        </header>
+        <h3>(Either select state and district of your choice or enter your pincode)</h3>
 
             <div class="getdetailChoice">
                 <div class="child1">
                     <select id = "stateSelect" onchange="selectDistPopulate()">
-                    <option value="default">select state</option>
+                    <option disabled selected value="default">select state</option>
                     </select>
                     <select id = "districtSelect">
-                        <option value="default">select district</option>
+                        <option disabled selected value="default">select district</option>
                     </select>
-                    <button onclick="test()">get details</button>
+                    <button class="defButton" onclick="detailsByDistrict()">SUBMIT</button>
                 </div>
                 <div class="child2">
                     <form name = "pincodeForm">
                         <label>PINCODE: </label>
-                        <input type="number" id="pincode" name="pincode">
-                        <input type=BUTTON value="Submit" onclick="testpincode()">
+                        <input type="number" class="pincodeInput" id="pincode" name="pincode">
+                        <input type=BUTTON class="submitButton" value="SUBMIT" onclick="detailsByPincode()">
                     </form>
                  </div>
-            </div>>
+            </div>
     </div>
     <div class="information">
-        <table id = "centreTable">
+        <table class="centreTable" id = "centreTable">
             <th>centre Id</th>
             <th>Block Name</th>
             <th>Pincode</th>
             <th>Vaccine Name</th>
-            <th>Min Age Limit</th>
+            <th>Min Age</th>
             <th>Fee Type</th>
             <th>Fee</th>
             <th>Avialable Capacity</th>
             <th>Timing</th>           
         </table>
     </div>
-
     <script src = "index.js"></script>
 </body>
 </html>

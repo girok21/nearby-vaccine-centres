@@ -65,7 +65,7 @@ function clearDropdown(element){
     option.setAttribute("value","default");
     element.insertBefore(option, element.lastChild);
 }
-async function test()
+async function detailsByDistrict()
 {
     let distId = document.getElementById("districtSelect").value;
     if(distId == "default")
@@ -96,12 +96,43 @@ async function test()
         td_feeType.innerHTML = centre[i].fee_type;
         td_fee.innerHTML = centre[i].fee;
         td_avCap.innerHTML = centre[i].available_capacity;
-        td_timing.innerHTML = centre[i].from;
-        
+        let timeValue = "";
+        let timing = centre[i].from.slice(0,5);
+        let hrs = parseInt(timing[0]+timing[1]);
+        if(hrs<12)
+        {
+            timeValue += `${hrs}`;
+            timeValue += (timing.slice(2,5) + " AM - ");
+        }
+        else
+        {
+            hrs-=12;
+            timeValue += `${hrs}`;
+            timeValue += (timing.slice(2,5) + " PM - ");
+        }
+
+        timing = centre[i].to.slice(0,5);
+        hrs = parseInt(timing[0]+timing[1]);
+        if(hrs<12)
+        {
+            timeValue += `${hrs}`;
+            timeValue += (timing + " AM");
+        }
+        else
+        {
+            hrs-=12;
+            timeValue += `${hrs}`;
+            timeValue += (timing.slice(2,5) + " PM");
+        }
+
+        td_timing.innerHTML = timeValue;   
         document.getElementById("centreTable").appendChild(tr);
     }
+    if(document.getElementById("centreTable").rows.length == 1)
+        alert("No Data Found");
+    resetSelectionBoxes();
 }
-async function testpincode()
+async function detailsByPincode()
 {
     let pincode = document.getElementById("pincode").value;
     console.log(pincode);
@@ -132,11 +163,48 @@ async function testpincode()
         td_feeType.innerHTML = centre[i].fee_type;
         td_fee.innerHTML = centre[i].fee;
         td_avCap.innerHTML = centre[i].available_capacity;
-        td_timing.innerHTML = centre[i].from;
-        
-        document.getElementById("centreTable").appendChild(tr);
-    }
+        let timeValue = "";
+        let timing = centre[i].from.slice(0,5);
+        let hrs = parseInt(timing[0]+timing[1]);
+        if(hrs<12)
+        {
+            timeValue += `${hrs}`;
+            timeValue += (timing.slice(2,5) + " AM - ");
+        }
+        else
+        {
+            hrs-=12;
+            timeValue += `${hrs}`;
+            timeValue += (timing.slice(2,5) + " PM - ");
+        }
 
+        timing = centre[i].to.slice(0,5);
+        hrs = parseInt(timing[0]+timing[1]);
+        if(hrs<12)
+        {
+            timeValue += `${hrs}`;
+            timeValue += (timing + " AM");
+        }
+        else
+        {
+            hrs-=12;
+            timeValue += `${hrs}`;
+            timeValue += (timing.slice(2,5) + " PM");
+        }
+
+        td_timing.innerHTML = timeValue;
+            document.getElementById("centreTable").appendChild(tr);
+    }
+    if(document.getElementById("centreTable").rows.length == 1)
+    alert("No Data Found");
+    resetSelectionBoxes();
+}
+
+function resetSelectionBoxes()
+{
+    document.getElementById("districtSelect").value = "default";
+    document.getElementById("stateSelect").value = "default";
+    document.getElementById("pincode").value = '';
 }
 
 async function clearTableData()
